@@ -15,7 +15,7 @@ class _UploadPageState extends State<UploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('上传'),
+        title: Text('文件上传'),
       ),
       body: ExcelFileUpload(),
     );
@@ -23,7 +23,7 @@ class _UploadPageState extends State<UploadPage> {
 }
 
 /////////////////////////////////////////
-// Excel文件上传
+// 文件上传
 /////////////////////////////////////////
 
 class ExcelFileUpload extends StatefulWidget {
@@ -32,7 +32,8 @@ class ExcelFileUpload extends StatefulWidget {
 }
 
 class _ExcelFileUploadState extends State<ExcelFileUpload> {
-  String _filePath = '';
+  String _uploadFilePath = '';
+  String _uploadProgress = '';
 
   void getFilePath() async {
     try {
@@ -41,17 +42,23 @@ class _ExcelFileUploadState extends State<ExcelFileUpload> {
         return;
       }
 
+      setState(() {
+        _uploadFilePath = filePath;
+      });
+
+      // 调用上传服务
       commonService.upload(
         new FormData.from({
           'file': new UploadFileInfo(new File(filePath), 'file.png')
-        })
+        }),
+        (int count, int total) {
+          // 设置上传进度
+          String progress = ((count / total) * 100).toStringAsFixed(2);
+          setState(() {
+            _uploadProgress = '$progress%';
+          });
+        }
       );
-      
-      print("File path: " + filePath);
-
-      setState((){
-        _filePath = filePath;
-      });
     } catch (e) {
       print("Error while picking the file: " + e.toString());
     }
@@ -59,16 +66,20 @@ class _ExcelFileUploadState extends State<ExcelFileUpload> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          RaisedButton(
-            onPressed: getFilePath,
-            child: Text('选择文件'),
-          ),
-          Text(_filePath)
-        ],
-      )
+    return Padding(
+      padding: EdgeInsets.all(15.0),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            RaisedButton(
+              onPressed: getFilePath,
+              child: Text('选择文件'),
+            ),
+            Text('文件路径：$_uploadFilePath'),
+            Text('上传进度：$_uploadProgress')
+          ],
+        )
+      ),
     );
   }
 }
