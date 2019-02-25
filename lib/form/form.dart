@@ -62,12 +62,22 @@ class _FormPageState extends State<FormPage> {
                   _password = val;
                 },
               ),
-              RaisedButton(
-                onPressed: _forSubmitted,
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
-                child: Text('登陆'),
-              )
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: RaisedButton(
+                        onPressed: _forSubmitted,
+                        color: Theme.of(context).primaryColor,
+                        textColor: Colors.white,
+                        child: Text('登陆'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

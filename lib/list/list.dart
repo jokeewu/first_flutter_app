@@ -51,7 +51,12 @@ class _UserListState extends State<UserList> {
       }
     });
 
-    store.dispatch(listRedux.fetchList());
+    // 进入页面检查是否存在数据
+    // 不存在才去加载数据，否则什么也不做
+    final list = store.state['user']['list']['data'];
+    if (list.length == 0) {
+      store.dispatch(listRedux.fetchList());
+    }
   }
 
   @override

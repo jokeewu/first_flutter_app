@@ -8,6 +8,7 @@
 - [x] 无限滚动列表
 - [ ] 表单
 - [x] 文件上传(file_picker+dart:io+dio)
+- [ ] 浏览网页
 - [ ] 本地存储
   - [ ] 文件(path_provider)
   - [ ] 数据库(sqflite)
