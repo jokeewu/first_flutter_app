@@ -75,3 +75,6 @@ build/
 
 # node
 node_modules
+
+# server
+server/upload
