@@ -9,6 +9,11 @@
 - [ ] 表单
 - [x] 文件上传(file_picker+dart:io+dio)
 - [ ] 本地存储
+  - [ ] 文件(path_provider)
+  - [ ] 数据库(sqflite)
+  - [ ] 简单数据(share_preferences)
+- [ ] 消息通知
 - [ ] 打包
+  - [ ] logo更换(flutter_launcher_icons)
   - [x] Android
   - [ ] IOS
