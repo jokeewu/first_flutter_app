@@ -44,27 +44,27 @@ class _ListDetailPageState extends State<ListDetailPage> {
         children: <Widget>[
           ListTile(
             title: Text('ID'),
-            trailing: Text(listItemData['id']),
+            trailing: Text(listItemData['id'] ?? ''),
           ),
           Divider(),
           ListTile(
             title: Text('姓名'),
-            trailing: Text(listItemData['full_name']),
+            trailing: Text(listItemData['full_name'] ?? ''),
           ),
           Divider(),
           ListTile(
             title: Text('年龄'),
-            trailing: Text(listItemData['age'].toString()),
+            trailing: Text((listItemData['age'] ?? '').toString()),
           ),
           Divider(),
           ListTile(
             title: Text('邮箱'),
-            trailing: Text(listItemData['email']),
+            trailing: Text(listItemData['email'] ?? ''),
           ),
           Divider(),
           ListTile(
             title: Text('地址'),
-            trailing: Text(listItemData['address']),
+            trailing: Text(listItemData['address'] ?? ''),
           ),
           Divider(),
         ],

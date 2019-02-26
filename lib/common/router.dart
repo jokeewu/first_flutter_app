@@ -6,6 +6,7 @@ import '../list/router_handlers.dart' as listHandlers;
 import '../form/router_handlers.dart' as formHandlers;
 import '../upload/router_handlers.dart' as uploadHandlers;
 import '../webview/router_handlers.dart' as webViewHandlers;
+import '../local_store/router_handlers.dart' as localStoreHandlers;
 
 final router = new Router();
 
@@ -28,4 +29,8 @@ void init() {
 
   // 打开网页
   router.define('/webview', handler: webViewHandlers.webview);
+
+  // 本地存储
+  router.define('/local_store/index', handler: localStoreHandlers.index);
+  router.define('/local_store/simple', handler: localStoreHandlers.simple);
 }

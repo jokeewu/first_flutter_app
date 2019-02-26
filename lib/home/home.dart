@@ -54,6 +54,14 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Text('浏览网页'),
               ),
+              RaisedButton(
+                textColor: Colors.white,
+                color: Theme.of(context).primaryColor,
+                onPressed: () {
+                  router.navigateTo(context, '/local_store/index');
+                },
+                child: Text('本地存储'),
+              ),
             ],
           ),
         ),
