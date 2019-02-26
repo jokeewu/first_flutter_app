@@ -46,6 +46,14 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Text('文件上传'),
               ),
+              RaisedButton(
+                textColor: Colors.white,
+                color: Theme.of(context).primaryColor,
+                onPressed: () {
+                  router.navigateTo(context, '/webview');
+                },
+                child: Text('浏览网页'),
+              ),
             ],
           ),
         ),

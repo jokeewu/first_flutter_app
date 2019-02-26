@@ -5,6 +5,7 @@ import '../index/router_handlers.dart' as indexHandlers;
 import '../list/router_handlers.dart' as listHandlers;
 import '../form/router_handlers.dart' as formHandlers;
 import '../upload/router_handlers.dart' as uploadHandlers;
+import '../webview/router_handlers.dart' as webViewHandlers;
 
 final router = new Router();
 
@@ -24,4 +25,7 @@ void init() {
 
   // 上传
   router.define('/upload', handler: uploadHandlers.upload);
+
+  // 打开网页
+  router.define('/webview', handler: webViewHandlers.webview);
 }
