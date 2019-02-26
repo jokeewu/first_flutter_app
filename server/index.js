@@ -55,7 +55,27 @@ rootRouter
           err_msg: ''
         });
         resolve();
-      }, 2000);
+      }, 1000);
+    });
+  })
+
+  .get('/api/users/:userId', async ctx => {
+    await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        ctx.body =  Mock.mock({
+          data: {
+            'id': uuid,
+            'full_name': '@name',
+            'age|18-30': 18,
+            'sex|+1': ['男', '女'],
+            'email': '@email',
+            'address': '@county(true)'
+          },
+          err_code: '',
+          err_msg: ''
+        });
+        resolve();
+      }, 1000);
     });
   })
   

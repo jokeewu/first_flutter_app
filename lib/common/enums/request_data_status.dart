@@ -6,3 +6,5 @@ enum RequestDataStatus {
   NO_DATA,
   NO_MORE_DATA,
 }
+
+// RequestDataStatus.values[]

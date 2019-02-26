@@ -8,13 +8,12 @@ import '../list/redux.dart' as listRedux;
 
 final store = new Store<Map>(
   combineReducers([
-    listRedux.reducer,
+    listRedux.listReducer,
+    listRedux.listItemReducer,
   ]), 
   initialState: {
-    'user': {
-      'list': getInitialListStore(),
-      'detail': getInitialDetailStore(),
-    },
+    'list': new ListState(),
+    'listItem': new DetailState(),
   },
   middleware: [thunkMiddleware]
 );

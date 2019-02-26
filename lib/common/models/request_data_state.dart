@@ -1,15 +1,18 @@
-import '../enums/request_data_status.dart';
+import '../constants/request_status.dart' as requestStatus;
 
-class PaginationStore {
-  final int pageIndex, pageSize, total;
+// 分页
+class PaginationState {
+  int pageIndex;
+  int pageSize;
+  int total;
 
-  const PaginationStore({
-    this.pageIndex = 0,
-    this.pageSize = 20,
-    this.total = 0
-  });
+  PaginationState({ int pageIndex, int pageSize, int total }) {
+    this.pageIndex = pageIndex ?? 0;
+    this.pageSize = pageSize ?? 20;
+    this.total = total ?? 0;
+  }
 
-  PaginationStore.fromJson(Map json)
+  PaginationState.fromJson(Map json)
     : pageIndex = json['page_index'] ?? 0,
       pageSize = json['page_size'] ?? 20,
       total = json['total'] ?? 0;
@@ -23,59 +26,74 @@ class PaginationStore {
   }
 }
 
-class ListStore {
-  // 业务数据
-  List data;
-  // 分页数据
-  PaginationStore pagination;
-  // 查询数据
+// 列表
+class ListState {
+  List list;
+  PaginationState pagination;
   Map query;
-  // 请求状态
-  dynamic status;
-  // 加载状态
-  bool get loading => status == RequestDataStatus.PENDING;
+  String status;
+  String statusMessage;
+  bool get loading => status == requestStatus.pending;
 
-  ListStore({ List data, PaginationStore pagination, Map query, dynamic status }) {
-    this.data = data ?? [];
-    this.pagination = pagination ?? new PaginationStore();
+  ListState({ 
+    List list, 
+    PaginationState pagination, 
+    Map query, 
+    String status,
+    String statusMessage,
+  }) {
+    this.list = list ?? [];
+    this.pagination = pagination ?? new PaginationState();
     this.query = query ?? {};
-    this.status = status ?? RequestDataStatus.EMPTY;
+    this.status = status ?? requestStatus.empty;
+    this.statusMessage = statusMessage ?? '';
   }
 
-  ListStore.fromJson(Map json)
-    : data = json['data'] ?? [],
-      pagination = json['pagination'] ? PaginationStore.fromJson(json['pagination']) : PaginationStore(),
+  ListState.fromJson(Map json)
+    : list = json['list'] ?? [],
+      pagination = json['pagination'] ? 
+        PaginationState.fromJson(json['pagination']) : 
+        PaginationState(),
       query = json['query'] ?? {},
-      status = json['status'] ?? RequestDataStatus.EMPTY;
+      status = json['status'] ?? requestStatus.empty,
+      statusMessage = json['statusMessage'] ?? '';
 
   Map toJson() {
     return {
-      'data': data,
+      'list': list,
       'pagination': pagination.toJson(),
       'query': query,
       'status': status,
+      'statusMessage': statusMessage,
       'loading': loading
     };
   }
 }
 
-class DetailStore {
+// 详情
+class DetailState {
   Map data;
   Map query;
-  dynamic status;
-  // 加载状态
-  bool get loading => status == RequestDataStatus.PENDING;
+  String status;
+  String statusMessage;
+  bool get loading => status == requestStatus.pending;
 
-  DetailStore({ List data, PaginationStore pagination, Map query, dynamic status }) {
+  DetailState({ 
+    List data, 
+    Map query, 
+    String status,
+    String statusMessage,
+  }) {
     this.data = data ?? {};
     this.query = query ?? {};
-    this.status = status ?? RequestDataStatus.EMPTY;
+    this.status = status ?? requestStatus.empty;
+    this.statusMessage = statusMessage ?? '';
   }
 
-  DetailStore.fromJson(Map json)
+  DetailState.fromJson(Map json)
     : data = json['data'] ?? {},
       query = json['query'] ?? {},
-      status = json['status'] ?? RequestDataStatus.EMPTY;
+      status = json['status'] ?? requestStatus.empty;
 
   Map toJson() {
     return {
@@ -85,18 +103,4 @@ class DetailStore {
       'loading': loading
     };
   }
-}
-
-Map getInitialListStore([Map json]) {
-  if (json == null) {
-    return new ListStore().toJson();
-  }
-  return new ListStore.fromJson(json).toJson();
-}
-
-Map getInitialDetailStore([Map json]) {
-  if (json == null) {
-    return new DetailStore().toJson();
-  }
-  return new DetailStore.fromJson(json).toJson();
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_redux/flutter_redux.dart';
 import './redux.dart' as listRedux;
+import '../common/router.dart';
 
 class ListPage extends StatelessWidget {
   @override
@@ -42,8 +43,8 @@ class _UserListState extends State<UserList> {
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        final userListStore = store.state['user']['list'];
-        final loading = userListStore['loading'];
+        final userListStore = store.state['list'];
+        final loading = userListStore.loading;
 
         if (!loading) {
           store.dispatch(listRedux.fetchList());
@@ -53,7 +54,8 @@ class _UserListState extends State<UserList> {
 
     // 进入页面检查是否存在数据
     // 不存在才去加载数据，否则什么也不做
-    final list = store.state['user']['list']['data'];
+
+    final list = store.state['list'].list;
     if (list.length == 0) {
       store.dispatch(listRedux.fetchList());
     }
@@ -67,9 +69,9 @@ class _UserListState extends State<UserList> {
 
   @override
   Widget build(BuildContext context) {
-    final userListStore = store.state['user']['list'];
-    final list = userListStore['data'];
-    final loading = userListStore['loading'];
+    final userListStore = store.state['list'];
+    final list = userListStore.list;
+    final loading = userListStore.loading;
 
     if (list.length == 0 && loading) {
       return Center(
@@ -94,8 +96,16 @@ class _UserListState extends State<UserList> {
           ),
         );
 
+        final listItem = list[index];
+        final fullName = listItem['full_name'];
+        final id = listItem['id'];
+
         return ListTile(
-          title: Text(list[index]['full_name']),
+          title: Text(fullName),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () {
+            router.navigateTo(context, '/list/$id');
+          },
         );
       },
     );

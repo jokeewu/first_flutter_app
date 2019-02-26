@@ -4,6 +4,6 @@ Future fetchList(Map query) async {
   return await request.get('/users');
 }
 
-Future fetchDetail(userId) async {
-  return await request.get('/users/$userId');
+Future fetchDetail(id) async {
+  return await request.get('/users/$id');
 }
