@@ -78,3 +78,5 @@ node_modules
 
 # server
 server/upload
+deploy_server.sh
+deploy_server_exclude.txt

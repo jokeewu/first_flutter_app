@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.js",
+    "start:prd": "forever start ./index.js",
+    "restart": "forever restart ./index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "mockjs": "^1.0.1-beta3",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "forever": "^0.15.3"
   }
 }
