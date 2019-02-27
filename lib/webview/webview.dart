@@ -14,9 +14,9 @@ class WebviewPage extends StatelessWidget {
       hidden: true,
       // ???没有loading...
       initialChild: Container(
-        color: Colors.redAccent,
+        color: Colors.white,
         child: const Center(
-          child: Text('Waiting.....'),
+          child: CircularProgressIndicator(),
         ),
       ),
     );
